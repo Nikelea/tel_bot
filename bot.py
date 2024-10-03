@@ -1,6 +1,7 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 import logging
+from datetime import datetime
 from fetchURL import fetch_currency 
 
 
@@ -29,7 +30,7 @@ class BotState:
                 number = int(exchange_rate)
         except ValueError:
             message = 'Не удалось получить свежий курс доллара. Попробуйте позже.'
-        message = f'Рад знакомству, {self.user_name}! Курс доллара сегодня:  {number:.2f}'
+        message = f'Рад знакомству, {self.user_name.capitalize()}! Курс доллара($) к рублю(₽) на {datetime.now().strftime("%d/%m/%Y %H:%M")} \n>>> {number:.2f} рублей <<<'
         await update.message.reply_text(message)
 
 def main():
